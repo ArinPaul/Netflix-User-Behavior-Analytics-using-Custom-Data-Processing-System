@@ -1,13 +1,18 @@
-def custom_read_csv(file_path, delimiter):
-    data = []
-    with open(file_path, 'r') as file:
-        headers = file.readline().strip().split(delimiter)
-        for line in file:
-            values = line.strip().split(delimiter)
-            row = {headers[i]: values[i] for i in range(len(headers))}
-            data.append(row)
-    return data
+from ..core.dataframe import DataFrame
 
+def read_csv(filename, delimiter=','):
+    with open(filename, 'r') as f:
+        lines = f.read().strip().split('\n')
 
-# Need to handle type conversion and missing values
-# Need to handle , and " in the data
+    header = lines[0].split(delimiter)
+    data = {h: [] for h in header}
+
+    for line in lines[1:]:
+        values = line.split(delimiter)
+        for h, v in zip(header, values):
+            val = v.strip()
+            if val.replace('.', '', 1).isdigit():
+                val = float(val) if '.' in val else int(val)
+            data[h].append(val)
+
+    return DataFrame(data)
