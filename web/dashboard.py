@@ -13,7 +13,7 @@ st.markdown("""
         font-size: 28px !important;
     }
     h2 {
-        font-size: 20px !important;
+        font-size: 16px !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -49,8 +49,7 @@ with col1:
     fig_genre = px.bar(
         x=genre_count.values,
         y=genre_count.index,
-        labels={'x': 'Number of Movies', 'y': 'Genre'},
-        title="Number of Movies by Genre"
+        labels={'x': 'Number of Movies', 'y': 'Genre'}
     )
 
     st.plotly_chart(fig_genre, use_container_width=True)
@@ -62,8 +61,7 @@ with col2:
 
     fig_country = px.pie(
         names=country_count.index,
-        values=country_count.values,
-        title="Number of Movies by Country of Origin"
+        values=country_count.values
     )
 
     st.plotly_chart(fig_country, use_container_width=True)
