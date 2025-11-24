@@ -44,7 +44,6 @@ class DataFrame:
     def merge(self, right, left_on, right_on, how="inner"):
         result_data = {}
         
-        # Prepare right mapping
         right_map = {}
         for r_val, idx in zip(right.data[right_on], range(right.length)):
             if r_val not in right_map:
@@ -52,17 +51,14 @@ class DataFrame:
             right_map[r_val].append(idx)
 
         merged_rows = []
-
         for i, l_val in enumerate(self.data[left_on]):
             right_indices = right_map.get(l_val, [])
             
             if right_indices:
                 for r_idx in right_indices:
                     row = {}
-                    # Add columns from left
                     for col in self.columns:
                         row[col] = self.data[col][i]
-                    # Add columns from right
                     for col in right.columns:
                         if col != right_on:
                             row[col] = right.data[col][r_idx]
@@ -76,7 +72,6 @@ class DataFrame:
                         row[col] = None
                 merged_rows.append(row)
 
-        # Handle right-only rows for outer join
         if how in ("right", "outer"):
             left_vals = set(self.data[left_on])
             for r_idx, r_val in enumerate(right.data[right_on]):
@@ -89,7 +84,6 @@ class DataFrame:
                             row[col] = right.data[col][r_idx]
                     merged_rows.append(row)
 
-        # Convert merged_rows to DataFrame
         merged_data = {col: [] for col in merged_rows[0]} if merged_rows else {}
         for row in merged_rows:
             for col, val in row.items():
@@ -98,13 +92,8 @@ class DataFrame:
         return DataFrame(merged_data)
     
     def sort_values(self, by, ascending=True):
-        # Get the column to sort
         col = self.data[by]
-        
-        # Generate sorted indices
         sorted_indices = sorted(range(self.length), key=lambda i: col[i], reverse=not ascending)
-        
-        # Build new sorted data
         new_data = {}
         for c in self.columns:
             new_data[c] = [self.data[c][i] for i in sorted_indices]

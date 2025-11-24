@@ -92,8 +92,3 @@ with col4:
     )
 
     st.plotly_chart(fig_ratings_dist, use_container_width=True)
-
-col5, col6 = st.columns(2)
-
-with col5:
-    st.subheader("")
