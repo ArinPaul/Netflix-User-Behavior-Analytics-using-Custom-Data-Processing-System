@@ -84,24 +84,50 @@ The application is deployed on Streamlit Cloud and can be accessed here: 👉 ht
 
 ---
 
+## 📂 Dataset
+
+The dataset contains two CSV file:
+1. movies.csv - This table contains 1,040 which provides metadata about the content (movies or shows) in the dataset. It gives context to user behavior, and can be joined with user interactions like reviews for analysis.
+2. reviews.csv - This table contains 15,450 reviews of users, thus capturing user-to-item interactions in the form of feedback or ratings. It is likely the core behavioral signal data, since it ties users to the movies via their opinions or actions.
+
+---
+
 ## 🌍 Features
 
-Interactive Map
-	•	Auto-detects latitude/longitude columns
-	•	Plots up to 5,000 crime locations for performance
-	•	Uses Mapbox Light theme
-	•	Fully interactive zoom & pan
+🎬 Movie Analytics
+- Genre-based distribution
+- Country of origin visualization
+
+⭐ User Rating Analytics
+- Histogram of ratings
+- Average rating per movie
+
+🔗 Joined Insights
+- Movie + review join
+- Top 10 rated movies
+
+---
+
+## 📐 Projection
+
+Displays combinations of any selected fields, such as:
+
+- **Genre**, **Country of Origin**
+- **Release Year**, **Primary Genre**
+- Any comma-separated selection of fields from the dataset
+
+This allows you to explore multi-attribute distributions and understand how different movie characteristics intersect.
 
 ---
 
 ## 🔎 Filtering
 
-Replicates the exact logic used in your Jupyter Notebook:
-	•	Exact string match
-	•	Case-insensitive
-	•	Trims whitespace
-	•	Aggregates by AREA NAME
-	•	Visualizes using horizontal bar charts
+Replicates the exact logic used in your data-processing pipeline:
+
+- Extracts unique country and genre values for dynamic user selection  
+- Filters and aggregates records based on user-defined inputs  
+- Performs accurate, case-insensitive string matching  
+- Generates visual insights through multiple interactive chart types
 
 ---
 
@@ -110,102 +136,41 @@ Replicates the exact logic used in your Jupyter Notebook:
 Powered by the custom MiniDataFrame engine (no pandas):
 
 Supports:
-	•	count
-	•	sum
-	•	mean
-	•	min
-	•	max
+- count
+- sum
+- mean
+- min
+- max
 
 ---
 
-## 📐 Projection
-
-Counts combinations of any selected fields, such as:
-	•	AREA NAME, Crm Cd Desc
-	•	Any comma-separated list
-
-Displayed via clean horizontal bar charts.
-
----
 ## 🔗 Custom Join Engine
 
-Self-join or custom join:
-	•	Supports: inner, left, right, outer
-	•	Normalizes strings to match keys
-	•	Optional suffix handling for duplicate columns
-
-Includes a dedicated Join Visualization tab:
-	•	Preview joined rows
-	•	Generate co-occurrence heatmaps (e.g., AREA NAME × AREA NAME_R)
-
----
-
-## 🕒 Crimes Over Time
-
-Uses the processed DATE OCC column to generate:
-	•	Daily crime count line chart
-	•	Optional smoothed rolling average
-	•	Shows long-term temporal behavior trends
-
----
-
-## 🔥 Temporal Heatmaps
-
-Two modes:
-
-1. Hour × Day of Week (Global)
-	•	7 × 24 heatmap
-	•	Reveals weekly periodic crime activity
-
-2. Area × Hour Heatmap (Notebook Logic)
-	•	Identifies Top N areas
-	•	Computes hourly crime frequencies
-	•	Displays a vertical heatmap representing peak hours per area
-
-Perfectly replicates your original notebook logic.
-
----
-
-## 📂 Dataset Requirements
-
-Your dataset must contain:
-
-Mandatory:
-	•	DATE OCC
-	•	TIME OCC
-	•	AREA NAME
-	•	Crm Cd Desc
-	•	DR_NO
-
-Coordinates: include either
-	•	LATITUDE & LONGITUDE
-or
-	•	a POINT(...) or Location column
-
-The app auto-detects and parses coordinate fields.
+Custom Join Functionality:
+- Supports multiple join types: inner, left, right, and outer  
+- Allows users to specify the columns to join on  
+- Automatically normalizes strings to ensure consistent key matching  
 
 ---
 
 ## 🔮 Future Work Ideas
-	•	ML-based crime hotspot prediction
-	•	NLP-generated summaries of crime activity
+	•	Sentiment analysis on reviews
+	•	Viewing pattern forecasting
 	•	Export dashboards to PDF reports
-	•	Interactive GeoJSON grid maps
-	•	Integration with Police Beat codes
+	•	Content-based recommendations
 
 ---
 
 ## 👤 Author
 
-Vidit Shah
-Master’s in Applied Data Science
-LA Crime Analytics Project
+Arin Paul
+
+Master’s in Applied Data Science - USC
 
 ---
 
 ## 📜 License
 
 For academic and educational use only.
-Not intended for operational law-enforcement deployment.
 
 ---
