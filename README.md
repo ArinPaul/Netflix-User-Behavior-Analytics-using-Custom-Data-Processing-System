@@ -1,74 +1,133 @@
 # Netflix User Behavior Analytics Dashboard
-*A Data-Driven Interactive Crime Analysis Tool for Los Angeles*
+*An Academic Implementation of Manual Data Processing, Analytics, and Visualization With Custom Pandas*
 
 ---
 
-## 📊 Overview  
-This project is a **Streamlit-based web application** designed to provide a complete analytical environment for exploring the **Los Angeles Crime Dataset** using a **custom-built MiniDataFrame engine** (your own parser, type-inference, filtering, projection, groupby, aggregation, join logic).
+## 📘 Project Overview  
+This project demonstrates a complete end-to-end custom data processing and analytics pipeline designed to analyze Netflix user behavior.
+Unlike typical dashboards built using Pandas or SQL engines, this project implements a fully custom data-processing framework that handles:
+- CSV parsing
+- DataFrame manipulation
+- Filtering, projection, joins
+- GroupBy and aggregation
+- Interactive data visualization through a Streamlit dashboard
 
-Unlike typical dashboards built with Pandas, this project uses a **pure Python analytical engine** that mirrors your notebook implementation, satisfying academic requirements for:
+The implementation highlights an in-depth understanding of data engineering fundamentals and satisfies academic requirements for building low-level data systems from scratch.
 
-- Manual CSV parsing  
-- Manual type inference  
-- Custom filter, groupby, join, aggregation  
-- Visualization consistent with notebook output  
-- Self-join visualization  
-- PyDeck-based geographic mapping  
-- Time-series analysis  
-- Temporal heatmaps  
+---
+## 🎯 Objectives
+
+The primary academic objectives include:
+
+1. Implementing a custom DataFrame engine without Pandas.
+2. Designing algorithms for:
+	- CSV parsing
+	- Filtering and selection
+	- GroupBy and aggregations
+	- Join operations
+3. Building an interactive streaming dashboard for:
+	- Genre and regional analytics
+ 	- Rating Distribution
+	- Movie insights
+	- Top Rated Movies
+	- Dynamic Filtering based on Country and Genre
+
+Demonstrating a complete workflow from **raw data → processing → analysis → insights**.
 
 ---
 
-## 🧱 Project Structure  
-Data-Driven-Crime-Analysis/
+## 🧱 Project Structure 
+```
+Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System/
 │
-├── app_streamlit.py        # Main Streamlit application
-├── data/
-│   └── la_crime_data.csv   # LA Crime dataset (not provided publicly)
+├── data/						# Netflix's data in CSV format
+│   ├── movies.csv
+│   ├── reviews.csv
 │
-├── src/
-│   └── crime_data_processor.py   # MiniDataFrame engine and helpers
+├── my_pandas/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── dataframe.py		# Custom DataFrame implementation
+│   │   ├── groupby.py			# Custom GroupBy and Aggregation logic
+│   │
+│   ├── utils/
+│       ├── parser.py			# CSV parser
 │
-├── requirements.txt        # Python package dependencies
-└── README.md               # Project documentation
+├── web.py						# Streamlit dashboard application
+├── requirements.txt			# Required libraries
+├── .gitignore
+└── README.md
+```
 
 ---
 
-## ⚙️ Installation & Setup
+## ▶️ Running the Project
 
 ### 1️⃣ Clone the Repository
-git clone https://github.com/vidmshah/Data-Driven-Crime-Analysis.git
-cd Data-Driven-Crime-Analysis
-
+```
+git clone https://github.com/ArinPaul/Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System.git
+cd Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System
+```
 ### 2️⃣ Install Dependencies
+```
 pip install -r requirements.txt
-
+```
 ### 3️⃣ Run the Streamlit Application
-streamlit run app_streamlit.py
+```
+streamlit run web.py --server.port 8888
+```
+Open the app in your browser at: 👉 http://localhost:8888
 
-Open the app in your browser at:
-👉 http://localhost:8501
+or,
+
+The application is deployed on Streamlit Cloud and can be accessed here: 👉 https://netflix-analytics-dashboard-v1.streamlit.app/
+
+---
+
+## 📂 Dataset
+
+The dataset contains two CSV file:
+1. movies.csv - This table contains 1,040 which provides metadata about the content (movies or shows) in the dataset. It gives context to user behavior, and can be joined with user interactions like reviews for analysis.
+2. reviews.csv - This table contains 15,450 reviews of users, thus capturing user-to-item interactions in the form of feedback or ratings. It is likely the core behavioral signal data, since it ties users to the movies via their opinions or actions.
 
 ---
 
 ## 🌍 Features
 
-Interactive Map
-	•	Auto-detects latitude/longitude columns
-	•	Plots up to 5,000 crime locations for performance
-	•	Uses Mapbox Light theme
-	•	Fully interactive zoom & pan
+🎬 Movie Analytics
+- Genre-based distribution
+- Country of origin visualization
+
+⭐ User Rating Analytics
+- Histogram of ratings
+- Average rating per movie
+
+🔗 Joined Insights
+- Movie + review join
+- Top 10 rated movies
+
+---
+
+## 📐 Projection
+
+Displays combinations of any selected fields, such as:
+
+- **Genre**, **Country of Origin**
+- **Release Year**, **Primary Genre**
+- Any comma-separated selection of fields from the dataset
+
+This allows you to explore multi-attribute distributions and understand how different movie characteristics intersect.
 
 ---
 
 ## 🔎 Filtering
 
-Replicates the exact logic used in your Jupyter Notebook:
-	•	Exact string match
-	•	Case-insensitive
-	•	Trims whitespace
-	•	Aggregates by AREA NAME
-	•	Visualizes using horizontal bar charts
+Replicates the exact logic used in your data-processing pipeline:
+
+- Extracts unique country and genre values for dynamic user selection  
+- Filters and aggregates records based on user-defined inputs  
+- Performs accurate, case-insensitive string matching  
+- Generates visual insights through multiple interactive chart types
 
 ---
 
@@ -77,102 +136,41 @@ Replicates the exact logic used in your Jupyter Notebook:
 Powered by the custom MiniDataFrame engine (no pandas):
 
 Supports:
-	•	count
-	•	sum
-	•	mean
-	•	min
-	•	max
+- count
+- sum
+- mean
+- min
+- max
 
 ---
 
-## 📐 Projection
-
-Counts combinations of any selected fields, such as:
-	•	AREA NAME, Crm Cd Desc
-	•	Any comma-separated list
-
-Displayed via clean horizontal bar charts.
-
----
 ## 🔗 Custom Join Engine
 
-Self-join or custom join:
-	•	Supports: inner, left, right, outer
-	•	Normalizes strings to match keys
-	•	Optional suffix handling for duplicate columns
-
-Includes a dedicated Join Visualization tab:
-	•	Preview joined rows
-	•	Generate co-occurrence heatmaps (e.g., AREA NAME × AREA NAME_R)
-
----
-
-## 🕒 Crimes Over Time
-
-Uses the processed DATE OCC column to generate:
-	•	Daily crime count line chart
-	•	Optional smoothed rolling average
-	•	Shows long-term temporal behavior trends
-
----
-
-## 🔥 Temporal Heatmaps
-
-Two modes:
-
-1. Hour × Day of Week (Global)
-	•	7 × 24 heatmap
-	•	Reveals weekly periodic crime activity
-
-2. Area × Hour Heatmap (Notebook Logic)
-	•	Identifies Top N areas
-	•	Computes hourly crime frequencies
-	•	Displays a vertical heatmap representing peak hours per area
-
-Perfectly replicates your original notebook logic.
-
----
-
-## 📂 Dataset Requirements
-
-Your dataset must contain:
-
-Mandatory:
-	•	DATE OCC
-	•	TIME OCC
-	•	AREA NAME
-	•	Crm Cd Desc
-	•	DR_NO
-
-Coordinates: include either
-	•	LATITUDE & LONGITUDE
-or
-	•	a POINT(...) or Location column
-
-The app auto-detects and parses coordinate fields.
+Custom Join Functionality:
+- Supports multiple join types: inner, left, right, and outer  
+- Allows users to specify the columns to join on  
+- Automatically normalizes strings to ensure consistent key matching  
 
 ---
 
 ## 🔮 Future Work Ideas
-	•	ML-based crime hotspot prediction
-	•	NLP-generated summaries of crime activity
+	•	Sentiment analysis on reviews
+	•	Viewing pattern forecasting
 	•	Export dashboards to PDF reports
-	•	Interactive GeoJSON grid maps
-	•	Integration with Police Beat codes
+	•	Content-based recommendations
 
 ---
 
 ## 👤 Author
 
-Vidit Shah
-Master’s in Applied Data Science
-LA Crime Analytics Project
+Arin Paul
+
+Master’s in Applied Data Science - USC
 
 ---
 
 ## 📜 License
 
 For academic and educational use only.
-Not intended for operational law-enforcement deployment.
 
 ---
