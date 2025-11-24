@@ -1,63 +1,86 @@
 # Netflix User Behavior Analytics Dashboard
-*A Fully Custom Data Processing & Analytics System Built Without Pandas*
+*An Academic Implementation of Manual Data Processing, Analytics, and Visualization With Custom Pandas*
 
 ---
 
-## 📊 Overview  
-This project is a **Streamlit-based web application** designed to provide a complete analytical environment for exploring the **Los Angeles Crime Dataset** using a **custom-built MiniDataFrame engine** (your own parser, type-inference, filtering, projection, groupby, aggregation, join logic).
+## 📘 Project Overview  
+This project demonstrates a complete end-to-end custom data processing and analytics pipeline designed to analyze Netflix user behavior.
+Unlike typical dashboards built using Pandas or SQL engines, this project implements a fully custom data-processing framework that handles:
+- CSV parsing
+- DataFrame manipulation
+- Filtering, projection, joins
+- GroupBy and aggregation
+- Interactive data visualization through a Streamlit dashboard
 
-Unlike typical dashboards built with Pandas, this project uses a **pure Python analytical engine** that mirrors your notebook implementation, satisfying academic requirements for:
+The implementation highlights an in-depth understanding of data engineering fundamentals and satisfies academic requirements for building low-level data systems from scratch.
 
-- Manual CSV parsing  
-- Manual type inference  
-- Custom filter, groupby, join, aggregation  
-- Visualization consistent with notebook output  
-- Self-join visualization  
-- PyDeck-based geographic mapping  
-- Time-series analysis  
-- Temporal heatmaps  
+---
+## 🎯 Objectives
+
+The primary academic objectives include:
+
+1. Implementing a custom DataFrame engine without Pandas.
+2. Designing algorithms for:
+	- CSV parsing
+	- Filtering and selection
+	- GroupBy and aggregations
+	- Join operations
+3. Building an interactive streaming dashboard for:
+	- Genre and regional analytics
+ 	- Rating Distribution
+	- Movie insights
+	- Top Rated Movies
+	- Dynamic Filtering based on Country and Genre
+
+Demonstrating a complete workflow from **raw data → processing → analysis → insights**.
 
 ---
 
-## 🧱 Project Structure  
+## 🧱 Project Structure 
+```
 Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System/
 │
-├── data/
+├── data/						# Netflix's data in CSV format
 │   ├── movies.csv
 │   ├── reviews.csv
 │
 ├── my_pandas/
 │   ├── __init__.py
 │   ├── core/
-│   │   ├── __init__.py
-│   │   ├── dataframe.py
-│   │   ├── groupby.py
+│   │   ├── dataframe.py		# Custom DataFrame implementation
+│   │   ├── groupby.py			# Custom GroupBy and Aggregation logic
 │   │
 │   ├── utils/
-│       ├── __init__.py
-│       ├── parser.py
+│       ├── parser.py			# CSV parser
 │
-├── web.py
-├── requirements.txt
+├── web.py						# Streamlit dashboard application
+├── requirements.txt			# Required libraries
+├── .gitignore
 └── README.md
-
+```
 
 ---
 
-## ⚙️ Installation & Setup
+## ▶️ Running the Project
 
 ### 1️⃣ Clone the Repository
-git clone https://github.com/vidmshah/Data-Driven-Crime-Analysis.git
-cd Data-Driven-Crime-Analysis
-
+```
+git clone https://github.com/ArinPaul/Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System.git
+cd Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System
+```
 ### 2️⃣ Install Dependencies
+```
 pip install -r requirements.txt
-
+```
 ### 3️⃣ Run the Streamlit Application
-streamlit run app_streamlit.py
+```
+streamlit run web.py --server.port 8888
+```
+Open the app in your browser at: 👉 http://localhost:8888
 
-Open the app in your browser at:
-👉 http://localhost:8501
+or,
+
+The application is deployed on Streamlit Cloud and can be accessed here: 👉 https://netflix-analytics-dashboard-v1.streamlit.app/
 
 ---
 
