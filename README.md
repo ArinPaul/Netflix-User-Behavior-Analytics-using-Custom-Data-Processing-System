@@ -20,17 +20,27 @@ Unlike typical dashboards built with Pandas, this project uses a **pure Python a
 ---
 
 ## 🧱 Project Structure  
-Data-Driven-Crime-Analysis/
+Netflix-User-Behavior-Analytics-using-Custom-Data-Processing-System/
 │
-├── app_streamlit.py        # Main Streamlit application
 ├── data/
-│   └── la_crime_data.csv   # LA Crime dataset (not provided publicly)
+│   ├── movies.csv
+│   ├── reviews.csv
 │
-├── src/
-│   └── crime_data_processor.py   # MiniDataFrame engine and helpers
+├── my_pandas/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── dataframe.py
+│   │   ├── groupby.py
+│   │
+│   ├── utils/
+│       ├── __init__.py
+│       ├── parser.py
 │
-├── requirements.txt        # Python package dependencies
-└── README.md               # Project documentation
+├── web.py
+├── requirements.txt
+└── README.md
+
 
 ---
 
