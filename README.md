@@ -1,5 +1,5 @@
 # Netflix User Behavior Analytics Dashboard
-*A Data-Driven Interactive Crime Analysis Tool for Los Angeles*
+*A Fully Custom Data Processing & Analytics System Built Without Pandas*
 
 ---
 
