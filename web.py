@@ -31,10 +31,12 @@ genre = st.sidebar.multiselect("Pick your Genre", movies["genre_primary"].unique
 
 movies_filtered = movies.copy()
 if country:
-    movies_filtered = movies_filtered[movies_filtered["country_of_origin"].isin(country)]
+    mask = movies_filtered.isin("country_of_origin", country)
+    movies_filtered = movies_filtered[mask]
 
 if genre:
-    movies_filtered = movies_filtered[movies_filtered["genre_primary"].isin(genre)]
+    mask = movies_filtered.isin("genre_primary", genre)
+    movies_filtered = movies_filtered[mask]
 
 with col1:
     st.subheader("Movies by Genre")
@@ -60,3 +62,38 @@ with col2:
 
     st.plotly_chart(fig_country, use_container_width=True)
 
+col3, col4 = st.columns(2)
+with col3:
+    st.subheader("Top 10 Movies by Average Rating")
+
+    merged = movies_filtered.merge(reviews, left_on='movie_id', right_on='movie_id')
+
+    avg_ratings = merged.groupby('title').agg({'rating': 'avg'})
+
+    top_10_movies = avg_ratings.sort_values(by='rating_avg', ascending=False).head(10)
+
+    st.table(
+    top_10_movies[['title', 'rating_avg']].rename(
+        columns={
+            'title': 'Movie Title',
+            'rating_avg': 'Average Rating'
+        }
+    ).data)
+
+with col4:
+    st.subheader("Ratings Distribution")
+
+    fig_ratings_dist = px.histogram(
+        merged.data,
+        x='rating',
+        nbins=20,
+        labels={'rating': 'Rating'},
+        title='Distribution of Movie Ratings'
+    )
+
+    st.plotly_chart(fig_ratings_dist, use_container_width=True)
+
+col5, col6 = st.columns(2)
+
+with col5:
+    st.subheader("")
